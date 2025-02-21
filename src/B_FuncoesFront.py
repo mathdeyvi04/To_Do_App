@@ -7,6 +7,36 @@ with open(
     )
 
 
+def adicionar_papel_de_parede(
+        janela: CTk
+) -> None:
+    """
+    Autoexplicativo
+    """
+
+    imagem = Image.open(
+        variaveis_globais["Janela"]["Papel de Parede"]["Caminho"]
+    ).convert("RGBA")
+
+    imagem.putalpha(
+        variaveis_globais["Janela"]["Papel de Parede"]["Opacidade"]
+    )
+
+    imagem_config = CTkImage(
+        imagem,
+        size=variaveis_globais["Janela"]["Dimensoes"]
+    )
+
+    CTkLabel(
+        janela,
+        image=imagem_config,
+        text=""
+    ).place(
+        x=0,
+        y=0
+    )
+
+
 def criar_janela() -> CTk:
     """
     Descrição:
@@ -18,7 +48,7 @@ def criar_janela() -> CTk:
     janela = CTk()
     janela.title(
         variaveis_globais["Janela"][
-            "Titulo_Do_App"
+            "Titulo"
         ]
     )
     dimensoes = variaveis_globais["Janela"][
@@ -31,6 +61,11 @@ def criar_janela() -> CTk:
         variaveis_globais["Janela"]["Icone"]
     )
 
+    if "Papel de Parede" in variaveis_globais["Janela"]:
+        adicionar_papel_de_parede(
+            janela
+        )
+
     CTkLabel(
         janela,
         font=(
@@ -39,7 +74,7 @@ def criar_janela() -> CTk:
         text="Gerenciador"
     ).place(
         x=(
-                  dimensoes[0] - 130
+          dimensoes[0] - 130
           ) // 2,
         y=10
     )

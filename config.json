@@ -1,0 +1,15 @@
+{
+    "Janela": {
+        "Titulo": "To_Do",
+        "Dimensoes": [
+            400,
+            600
+        ],
+        "Icone": "C:\\Users\\deyvi\\Documents\\ImperioPy\\Aplicativos\\Tkinter\\To_Do_App\\icone.ico",
+        "Papel de Parede": {
+            "Caminho": "C:\\Users\\deyvi\\Documents\\ImperioPy\\Aplicativos\\Tkinter\\To_Do_App\\imagem.png",
+            "Opacidade": 100
+        }
+    },
+    "Tarefas": []
+}

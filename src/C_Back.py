@@ -5,3 +5,9 @@ with open(
     exec(
         arq.read()
     )
+
+
+def adicionar_tarefa(
+        tarefa: str
+) -> None:
+    print(tarefa)

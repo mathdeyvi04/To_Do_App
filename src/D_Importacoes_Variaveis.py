@@ -1,34 +1,43 @@
 from customtkinter import *
+from tkinter.ttk import Treeview
 
 import os
 import json as js
 from PIL import Image
 
-variaveis_globais = {
-    "Janela": {
-        "Titulo_Do_App": "To_Do",
-        "Dimensoes": (400, 600),
-        "Icone": os.getcwd() + r"\icone.ico"  # Sempre conosco.
-    },
+# Devemos verificar se o arquivo base está disponível.
+# Caso não, devemos criá-lo do zero.
+CAMINHO_DO_ARQUIVO_DE_CONFIG = os.getcwd() + r"\config.json"
+if not os.path.exists(
+    CAMINHO_DO_ARQUIVO_DE_CONFIG
+):
+    variaveis_globais = {
+        "Janela": {
+            "Titulo": "To_Do",
+            "Dimensoes": (400, 600),
+            "Icone": os.getcwd() + "\icone.ico"
+        },
+        "Tarefas": [
+            # Dentro da lista, haverá dicionários
+            # na forma de {"Data": ..., "Corpo": ...}
+        ]
+    }
 
-    "Caminho_de_configuracoes": os.getcwd() + r"\config.json",
-    "Caminho_de_Tarefas": os.getcwd() + r"\tarefas.json",
-}
+    with open(
+        CAMINHO_DO_ARQUIVO_DE_CONFIG,
+        "x"
+    ) as arq:
+        js.dump(
+            variaveis_globais,
+            arq,
+            indent=4
+        )
+else:
+    with open(
+        CAMINHO_DO_ARQUIVO_DE_CONFIG,
+        "r"
+    ) as arq:
+        variaveis_globais = js.loads(
+            arq.read()
+        )
 
-# Devemos verificar se o arquivo de tarefas existe.
-# Caso não, criaremos ele.
-for chave in variaveis_globais:
-    if chave.startswith(
-        "Cam"
-    ):
-        if not os.path.exists(
-                variaveis_globais[
-                    chave
-                ]
-        ):
-            open(
-                variaveis_globais[
-                    chave
-                ],
-                "x"
-            ).close()
