@@ -8,51 +8,21 @@ with open(
         arq.read()
     )
 
-janela = criar_janela()
 from customtkinter import *
+janela = criar_janela()
 
-# Dispor uma entrada para o usuário acrescentar tarefas
-entrada_do_usuario = CTkEntry(
+tv = apresenta_tarefas(
+    janela
+)
+
+entrada_do_usuario = permitindo_entrada(
     janela,
-    font=(
-        "Helvetica",
-        15
-    ),
-    placeholder_text="Insira uma nova tarefa",
-    corner_radius=0,
-    width=300,
-    height=40
-)
-entrada_do_usuario.pack(
-    fill="x",
-    pady=100
+    tv
 )
 
-entrada_do_usuario.bind(
-    "<Return>",
-    lambda event: adicionar_tarefa(entrada_do_usuario.get())
+janela.protocol(
+    "WM_DELETE_WINDOW",
+    lambda: salvar_variaveis_globais(janela)
 )
-
-# Dispor as tarefas cadastradas.
-tv = Treeview(
-    janela,
-    columns=[
-        "Data",
-        "Corpo"
-    ],
-    show="headings"
-)
-
-tv.heading(
-    "Data",
-    text="Data"
-)
-tv.heading(
-    "Corpo",
-    text="Corpo"
-)
-
-
-
 
 janela.mainloop()

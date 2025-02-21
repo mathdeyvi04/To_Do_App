@@ -2,7 +2,7 @@
     "Janela": {
         "Titulo": "To_Do",
         "Dimensoes": [
-            400,
+            500,
             600
         ],
         "Icone": "C:\\Users\\deyvi\\Documents\\ImperioPy\\Aplicativos\\Tkinter\\To_Do_App\\icone.ico",
@@ -11,5 +11,10 @@
             "Opacidade": 100
         }
     },
-    "Tarefas": []
+    "Tarefas": [
+        {
+            "Data": "2025-02-20",
+            "Corpo": "Exemplo"
+        }
+    ]
 }

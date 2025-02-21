@@ -1,9 +1,11 @@
 from customtkinter import *
-from tkinter.ttk import Treeview
+from tkinter.ttk import Treeview, Style
+
 
 import os
 import json as js
 from PIL import Image
+from datetime import date
 
 # Devemos verificar se o arquivo base está disponível.
 # Caso não, devemos criá-lo do zero.
