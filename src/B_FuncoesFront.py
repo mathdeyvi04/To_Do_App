@@ -104,7 +104,7 @@ def permitindo_entrada(
 
     entrada_do_usuario.bind(
         "<Return>",
-        lambda event: adicionar_tarefa(entrada_do_usuario.get(), tv)
+        lambda event: adicionar_tarefa(entrada_do_usuario, tv)
     )
 
     return entrada_do_usuario
@@ -180,12 +180,28 @@ def apresenta_tarefas(
             )
         )
 
+    height = (variaveis_globais["Janela"]["Dimensoes"][1] - 70) - 50
     tv.place(
         x=0,
         y=200,
-        # Devemos realizar uma regressão e descobrir como esses
-        # números estão sendo alterados.
-        width=variaveis_globais["Janela"]["Dimensoes"][0]
+        # Função que define a variação de comprimento:
+        width=variaveis_globais["Janela"]["Dimensoes"][0] * 1.235 + 8,
+        height=height
+    )
+
+    tv.bind(
+        "<Double-1>",
+        lambda event: selecionar_tarefa(tv)
+    )
+
+    CTkLabel(
+        janela,
+        text="Clique duas vezes para apagar tarefa.",
+        font=("Helvetica", 12),
+        fg_color="#2e2e2e"
+    ).place(
+        x=5,
+        y=height + 35
     )
 
     return tv

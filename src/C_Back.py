@@ -8,10 +8,13 @@ with open(
 
 
 def adicionar_tarefa(
-        tarefa: str,
+        entrada_de_tarefa: CTkEntry,
         tv: Treeview
 ) -> None:
     """Adicionamos a nova tarefa."""
+
+    if entrada_de_tarefa.get() == "":
+        return None
 
     hoje = str(date.today())
 
@@ -19,7 +22,7 @@ def adicionar_tarefa(
     variaveis_globais["Tarefas"].append(
         {
             "Data": hoje,
-            "Corpo": tarefa
+            "Corpo": entrada_de_tarefa.get()
         }
     )
 
@@ -29,9 +32,10 @@ def adicionar_tarefa(
         "end",
         values=(
             hoje,
-            tarefa
+            entrada_de_tarefa.get()
         )
     )
+    entrada_de_tarefa.delete(0, "end")
 
     return None
 
@@ -50,6 +54,32 @@ def salvar_variaveis_globais(
         )
 
     janela.destroy()
+
+
+def selecionar_tarefa(
+        tv: Treeview
+) -> None:
+    """
+    Vamos apagar uma determinada tarefa selecionada.
+    """
+
+    item_sel = tv.selection()[0]
+
+    tarefa_selecionada = tv.item(
+        item_sel
+    )["values"]
+
+    tarefa_selecionada = {
+        "Corpo": tarefa_selecionada[1],
+        "Data": tarefa_selecionada[0]
+    }
+
+    variaveis_globais["Tarefas"].remove(
+        tarefa_selecionada
+    )
+
+    tv.delete(item_sel)
+
 
 
 
