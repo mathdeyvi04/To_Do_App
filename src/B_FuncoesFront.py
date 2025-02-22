@@ -65,19 +65,6 @@ def criar_janela() -> CTk:
             janela
         )
 
-    CTkLabel(
-        janela,
-        font=(
-            None, 25
-        ),
-        text="Gerenciador"
-    ).place(
-        x=(
-                  dimensoes[0] - 130
-          ) // 2,
-        y=10
-    )
-
     return janela
 
 
@@ -205,3 +192,131 @@ def apresenta_tarefas(
     )
 
     return tv
+
+
+def possibilitar_customizacao(
+        janela: CTk
+) -> None:
+    """
+    Permitir algumas alterações na janela.
+    """
+
+    def puxar_barra_lateral() -> None:
+        brl = CTkFrame(
+            janela,
+
+            width=variaveis_globais["Janela"]["Dimensoes"][0],
+            height=variaveis_globais["Janela"]["Dimensoes"][1]
+        )
+        brl.place(
+            x=0,
+            y=0
+        )
+
+        # filedialog.askopenfilename()
+
+        # Possibilitando modificações de tamanho.
+
+        def verificar_novo_tam(
+                novo_tam_digitado: str
+        ) -> None:
+            """Verificará se está no formato correto e se os números são válidos."""
+            try:
+                novo_comp, nova_alt = novo_tam_digitado.split("x")
+                novo_comp = int(novo_comp)
+                nova_alt = int(nova_alt)
+
+                variaveis_globais["Janela"]["Dimensoes"] = [novo_comp, nova_alt]
+
+                return None
+            except:
+                msb.showwarning(
+                    "Atenção",
+                    "Entrada de Novo Tamanho Inválida."
+                )
+
+        novo_tam = CTkEntry(
+            brl,
+            placeholder_text="Informe as novas dimensoes como COMPXALT",
+            corner_radius=0,
+            width=300
+        )
+        novo_tam.place(
+            x=10,
+            y=30
+        )
+
+        CTkLabel(
+            brl,
+            text=variaveis_globais["Janela"]["Papel de Parede"]["Caminho"],
+            font=("Helvetica", 10)
+        ).place(
+            x=10,
+            y=150
+        )
+
+        def obter_novo_wallpaper() -> None:
+            caminho_para_novo_wp = filedialog.askopenfilename()
+
+            if not os.path.exists(
+                    caminho_para_novo_wp
+            ):
+                msb.showwarning(
+                    "Atenção",
+                    "Caminho não existe."
+                )
+
+                return None
+
+            variaveis_globais[
+                "Janela"
+            ][
+                "Papel de Parede"
+            ]["Caminho"] = caminho_para_novo_wp
+
+            CTkLabel(
+                brl,
+                text=variaveis_globais["Janela"]["Papel de Parede"]["Caminho"],
+                font=("Helvetica", 10)
+            ).place(
+                x=10,
+                y=150
+            )
+
+        CTkButton(
+            brl,
+            text="Alterar Papel de Parede",
+            command=obter_novo_wallpaper
+        ).place(
+            x=7,
+            y=120
+        )
+
+        novo_tam.bind(
+            "<Return>",
+            lambda event: verificar_novo_tam(novo_tam.get())
+        )
+
+        CTkButton(
+            brl,
+            text="Fechar",
+            command=lambda: brl.destroy()
+        ).place(
+            x=10,
+            y=variaveis_globais["Janela"]["Dimensoes"][1] - 40
+        )
+
+    CTkButton(
+        janela,
+        text="",
+        width=30,
+        height=30,
+        fg_color="#65709c",
+        bg_color="#65709c",
+        hover_color="#495273",
+        corner_radius=0,
+        command=puxar_barra_lateral
+    ).place(
+        x=10,
+        y=20
+    )

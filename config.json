@@ -7,9 +7,14 @@
         ],
         "Icone": "C:\\Users\\deyvi\\Documents\\ImperioPy\\Aplicativos\\Tkinter\\To_Do_App\\icone.ico",
         "Papel de Parede": {
-            "Caminho": "C:\\Users\\deyvi\\Documents\\ImperioPy\\Aplicativos\\Tkinter\\To_Do_App\\imagem.png",
+            "Caminho": "C:/Users/deyvi/Documents/wallpaper/brancaolhandoceu.jpeg",
             "Opacidade": 200
         }
     },
-    "Tarefas": []
+    "Tarefas": [
+        {
+            "Data": "2025-02-21",
+            "Corpo": "Fazer mais projetos"
+        }
+    ]
 }

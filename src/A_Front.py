@@ -8,7 +8,6 @@ with open(
         arq.read()
     )
 
-from customtkinter import *
 janela = criar_janela()
 
 tv = apresenta_tarefas(
@@ -23,6 +22,10 @@ entrada_do_usuario = permitindo_entrada(
 janela.protocol(
     "WM_DELETE_WINDOW",
     lambda: salvar_variaveis_globais(janela)
+)
+
+possibilitar_customizacao(
+    janela
 )
 
 janela.mainloop()
